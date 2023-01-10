@@ -2,7 +2,6 @@ package com.example.springbootvendas.service;
 
 import com.example.springbootvendas.model.Cliente;
 import com.example.springbootvendas.repository.ClientesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
