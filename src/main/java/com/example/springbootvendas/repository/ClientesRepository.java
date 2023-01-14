@@ -1,6 +1,6 @@
 package com.example.springbootvendas.repository;
 
-import com.example.springbootvendas.model.Cliente;
+import com.example.springbootvendas.entity.Cliente;
 import org.springframework.stereotype.Repository;
 
 @Repository

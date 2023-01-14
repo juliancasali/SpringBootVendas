@@ -1,6 +1,6 @@
 package com.example.springbootvendas.service;
 
-import com.example.springbootvendas.model.Cliente;
+import com.example.springbootvendas.entity.Cliente;
 import com.example.springbootvendas.repository.ClientesRepository;
 import org.springframework.stereotype.Service;
 
