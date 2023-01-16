@@ -1,10 +1,12 @@
 package com.example.springbootvendas.repository;
 
 import com.example.springbootvendas.entity.Cliente;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,8 +24,11 @@ public class Clientes {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private EntityManager entityManager;
+
+    @Transactional
     public Cliente save(Cliente cliente){
-        jdbcTemplate.update(INSERT, cliente.getName());
+        entityManager.persist(cliente);
         return cliente;
     }
 
