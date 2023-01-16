@@ -1,7 +1,19 @@
 package com.example.springbootvendas.entity;
 
+import jakarta.persistence.*;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+
+@Entity
+@Table(name = "cliente")
 public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id",length = 100)
     private Integer id;
+
+    @Column(name = "name")
+
     private String name;
 
     public Cliente() {
