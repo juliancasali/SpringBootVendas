@@ -18,18 +18,18 @@ public class VendasApplication {
         return args -> {
 
             System.out.println("Salvando clientes: ");
-            clientes.save(new Cliente(null,"julian"));
-            clientes.save(new Cliente(null,"Lucia"));
+            clientes.save(new Cliente("julian"));
+            clientes.save(new Cliente("Lucia"));
 
-            List<Cliente> selectAll = clientes.selectAll();
+            List<Cliente> selectAll = clientes.findAll();
             selectAll.forEach(System.out::println);
 
             System.out.println("Atualizando cliente");
             selectAll.forEach(c -> {c.setName(c.getName() + " atualizado");
-            clientes.update(c);
+            clientes.save(c);
             });
 
-            selectAll = clientes.selectAll();
+            selectAll = clientes.findAll();
             if(selectAll.isEmpty()){
                 System.out.println("Nenhum cliente encontrado");
             }
@@ -38,13 +38,13 @@ public class VendasApplication {
             }
 
             System.out.println("Buscando cliente:");
-            clientes.findName("Lu").forEach(System.out::println);
+            clientes.findByNameLike("Lu").forEach(System.out::println);
 
 
             System.out.println("Deletando clientes:");
-            clientes.selectAll().forEach(clientes::delete);
+            clientes.findAll().forEach(c -> clientes.delete(c));
 
-            selectAll = clientes.selectAll();
+            selectAll = clientes.findAll();
             if(selectAll.isEmpty()){
                 System.out.println("Nenhum cliente encontrado");
             }
@@ -56,6 +56,5 @@ public class VendasApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VendasApplication.class,args);
-
     }
 }
