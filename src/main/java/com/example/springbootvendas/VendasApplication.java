@@ -21,10 +21,20 @@ public class VendasApplication {
             clientes.save(new Cliente("julian"));
             clientes.save(new Cliente("Lucia"));
 
-
             System.out.println("Buscando cliente:");
             List<Cliente> result = clientes.findByNameLike("Lucia");
             result.forEach(System.out::println);
+
+            System.out.println("Deletando clientes:");
+            clientes.deleteByName("Julian");
+
+            List<Cliente> selectAll = clientes.findAll();
+            if(selectAll.isEmpty()){
+                System.out.println("Nenhum cliente encontrado");
+            }
+            else {
+                selectAll.forEach(System.out::println);
+            }
         };
     }
 
