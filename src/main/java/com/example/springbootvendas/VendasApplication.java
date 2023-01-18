@@ -26,7 +26,7 @@ public class VendasApplication {
             result.forEach(System.out::println);
 
             System.out.println("Deletando clientes:");
-            clientes.deleteByName("Julian");
+            //clientes.deleteByName("Julian");
 
             List<Cliente> selectAll = clientes.findAll();
             if(selectAll.isEmpty()){
