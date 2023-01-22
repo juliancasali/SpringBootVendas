@@ -3,18 +3,22 @@ package com.example.springbootvendas.entity;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id",length = 100)
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "name")
-
+    @Column(name = "name",length = 100)
     private String name;
+
+    @OneToMany(mappedBy = "cliente")
+    private Set<Pedido> pedidos;
 
     public Cliente() {
     }
@@ -26,6 +30,10 @@ public class Cliente {
     public Cliente(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
     }
 
     public Integer getId() {
