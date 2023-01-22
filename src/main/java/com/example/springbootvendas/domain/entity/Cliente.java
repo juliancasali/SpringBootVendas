@@ -1,7 +1,6 @@
-package com.example.springbootvendas.entity;
+package com.example.springbootvendas.domain.entity;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public class Cliente {
     @Column(name = "name",length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
     private Set<Pedido> pedidos;
 
     public Cliente() {

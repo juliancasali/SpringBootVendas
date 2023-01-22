@@ -1,4 +1,4 @@
-package com.example.springbootvendas.entity;
+package com.example.springbootvendas.domain.entity;
 
 import jakarta.persistence.*;
 
