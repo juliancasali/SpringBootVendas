@@ -24,4 +24,11 @@ public class ClienteController {
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/api/clientes")
+    @ResponseBody
+    public ResponseEntity<Cliente> save(@RequestBody Cliente cliente){
+        Cliente clienteSalvo = clientes.save(cliente);
+        return ResponseEntity.ok(clienteSalvo);
+    }
+
 }
