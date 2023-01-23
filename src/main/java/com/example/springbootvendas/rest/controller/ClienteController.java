@@ -24,11 +24,23 @@ public class ClienteController {
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/api/clientes")
+    @PostMapping("/api/clientes")
     @ResponseBody
     public ResponseEntity<Cliente> save(@RequestBody Cliente cliente){
         Cliente clienteSalvo = clientes.save(cliente);
         return ResponseEntity.ok(clienteSalvo);
+    }
+
+    @DeleteMapping("/api/clientes/{id}")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@PathVariable Integer id){
+        Optional<Cliente>  cliente = clientes.findById(id);
+
+        if(cliente.isPresent()){
+            clientes.delete(cliente.get());
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
