@@ -36,29 +36,36 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
     public void delete(@PathVariable Integer id) {
-        produtos.findById(id).
-                map(p -> {
+        produtos
+                .findById(id)
+                .map(p -> {
                     produtos.delete(p);
                     return Void.TYPE;
-                }).
-                orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Produto não encontrado"));
+                })
+                .orElseThrow(
+                        () -> new ResponseStatusException(NOT_FOUND, "Produto não encontrado"));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Produto produto) {
-        produtos.findById(id).map(p -> {
-            produto.setId(p.getId());
-            produtos.save(produto);
-            return p;
-        }).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Produto não encontrado"));
+        produtos
+                .findById(id)
+                .map(p -> {
+                    produto.setId(p.getId());
+                    produtos.save(produto);
+                    return p;
+                }).orElseThrow(
+                        () -> new ResponseStatusException(NOT_FOUND, "Produto não encontrado"));
     }
 
     @GetMapping
     public List<Produto> find(Produto filtro) {
-        ExampleMatcher matcher = ExampleMatcher.matching()
+        ExampleMatcher matcher = ExampleMatcher
+                .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
         Example<Produto> example = Example.of(filtro, matcher);
         return produtos.findAll(example);
     }
