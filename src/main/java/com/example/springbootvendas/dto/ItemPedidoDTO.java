@@ -1,4 +1,4 @@
-package com.example.springbootvendas.rest.dto;
+package com.example.springbootvendas.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
