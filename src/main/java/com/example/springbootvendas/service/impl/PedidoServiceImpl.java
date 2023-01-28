@@ -9,12 +9,14 @@ import com.example.springbootvendas.domain.repository.Clientes;
 import com.example.springbootvendas.domain.repository.ItensPedido;
 import com.example.springbootvendas.domain.repository.Pedidos;
 import com.example.springbootvendas.domain.repository.Produtos;
+import com.example.springbootvendas.exception.PedidoNaoEncontradoException;
 import com.example.springbootvendas.exception.RegraDeNegocioException;
 import com.example.springbootvendas.dto.ItemPedidoDTO;
 import com.example.springbootvendas.dto.PedidoDTO;
 import com.example.springbootvendas.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -73,5 +75,16 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return pedidos.findByIdFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        pedidos.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidos.save(pedido);
+                }).orElseThrow(PedidoNaoEncontradoException::new);
+
     }
 }
