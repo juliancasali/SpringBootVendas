@@ -8,6 +8,7 @@ import com.example.springbootvendas.dto.InformacaoItemPedidoDTO;
 import com.example.springbootvendas.dto.InformacoesPedidoDTO;
 import com.example.springbootvendas.dto.PedidoDTO;
 import com.example.springbootvendas.service.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,7 +32,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public Integer save(@RequestBody PedidoDTO pedidoDTO){
+    public Integer save(@RequestBody @Valid PedidoDTO pedidoDTO){
         Pedido pedido = service.salvar(pedidoDTO);
         return pedido.getId();
     }
