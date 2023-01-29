@@ -2,6 +2,7 @@ package com.example.springbootvendas.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Cliente {
     private Integer id;
 
     @Column(name = "name",length = 100)
+    @NotEmpty(message = "Campo nome é obrigatório.")
     private String name;
 
     @Column(name = "cpf", length = 11)
@@ -30,8 +32,4 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
     private Set<Pedido> pedidos;
 
-    public Cliente(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }

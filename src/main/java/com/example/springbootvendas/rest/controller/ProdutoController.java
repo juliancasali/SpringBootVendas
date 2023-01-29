@@ -21,7 +21,7 @@ public class ProdutoController {
         this.produtos = produtos;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Produto getProdutoById(@PathVariable Integer id) {
         return produtos.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Produtos não encontrado"));
@@ -33,7 +33,7 @@ public class ProdutoController {
         return produtos.save(produto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void delete(@PathVariable Integer id) {
         produtos
@@ -46,7 +46,7 @@ public class ProdutoController {
                         () -> new ResponseStatusException(NOT_FOUND, "Produto não encontrado"));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Produto produto) {
         produtos
