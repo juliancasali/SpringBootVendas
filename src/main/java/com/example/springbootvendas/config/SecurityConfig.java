@@ -1,7 +1,7 @@
 package com.example.springbootvendas.config;
 
-import com.example.springbootvendas.security.jwt.JwtAuthFilter;
-import com.example.springbootvendas.security.jwt.JwtService;
+import com.example.springbootvendas.security.JwtAuthFilter;
+import com.example.springbootvendas.security.JwtService;
 import com.example.springbootvendas.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,12 +27,13 @@ public class SecurityConfig {
 
     private final UsuarioServiceImpl usuarioService;
 
-    private JwtService jwtService;
+    private final JwtService jwtService;
 
     @Autowired
     @Lazy
-    public SecurityConfig(UsuarioServiceImpl usuarioService) {
+    public SecurityConfig(UsuarioServiceImpl usuarioService, JwtService jwtService) {
         this.usuarioService = usuarioService;
+        this.jwtService = jwtService;
     }
 
     @Bean

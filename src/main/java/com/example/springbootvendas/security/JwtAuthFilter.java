@@ -1,4 +1,4 @@
-package com.example.springbootvendas.security.jwt;
+package com.example.springbootvendas.security;
 
 import com.example.springbootvendas.service.impl.UsuarioServiceImpl;
 import jakarta.servlet.FilterChain;

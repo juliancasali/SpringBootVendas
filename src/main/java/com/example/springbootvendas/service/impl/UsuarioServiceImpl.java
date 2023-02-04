@@ -2,6 +2,7 @@ package com.example.springbootvendas.service.impl;
 
 import com.example.springbootvendas.domain.entity.Usuario;
 import com.example.springbootvendas.domain.repository.Usuarios;
+import com.example.springbootvendas.exception.SenhaInvalidaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,15 @@ public class UsuarioServiceImpl implements UserDetailsService {
     @Transactional
     public Usuario salvar(Usuario usuario){
         return usuariosRepository.save(usuario);
+    }
+
+    public UserDetails autenticar(Usuario usuario){
+        UserDetails user = loadUserByUsername(usuario.getLogin());
+        boolean senhaBatem = encoder.matches(usuario.getSenha(), user.getPassword());
+        if(senhaBatem) {
+            return user;
+        }
+        throw new SenhaInvalidaException();
     }
 
     @Override
