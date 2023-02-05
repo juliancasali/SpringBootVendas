@@ -18,7 +18,7 @@ import java.util.Set;
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // no mysql usa identity, h2 auto
     @Column(name = "id")
     private Integer id;
 
